@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[本机利用sublime text 3编写markdown博客]]></title>
+    <url>%2F2017%2F04%2F22%2F%E6%9C%AC%E6%9C%BA%E5%88%A9%E7%94%A8sublime-text-3%E7%BC%96%E5%86%99markdown%E5%8D%9A%E5%AE%A2%2F</url>
+    <content type="text"><![CDATA[环境操作系统：win10 安装插件一共需要安装两个插件：① MarkdownEditing② OmniMarkupPreviewer 安装方法在sublime text 3中ctrl+shift+p,在跳出的输入框里输入install package,等待一会后，在输入框里输入插件名称，选择我们想要的插件就可以啦。 在这里需要说明下，我安装完插件MarkdownEditing后，光标显示的有问题。 快捷键markdownediting主要的作用是语法样式优化：可以提供了一些快捷键：先给出官网地址windows/linux: table td:nth-child(1) { white-space: nowrap; } 快捷键 描述 ctrl + win +v Creates or pastes the contents of the clipboard as an inline link on selected text. 创建或粘贴剪贴板的内容作为选定文本的内联链接。 ctrl + win +R Creates or pastes the contents of the clipboard as a reference link.创建或粘贴剪贴板的内容作为参考链接。 shift + win +k Creates or pastes the contents of the clipboard as an inline image on selected text.在选定文本上创建或粘贴剪贴板的内容为内联图像。 alt + B、alt + I 分别为，加粗和斜体 ctrl + 1..6 对于选中的内容前加对应个数#,即对选中内容字体大小设置为h1~h6; alt + shift + 6 插入脚注 小知识上述的表格快捷键那一栏本来是不能一行显示的，我在表格前添加了如下代码：12345## 表格第一列单元格内容不换行，多数情况下表格首列不应该被压缩换行table td:nth-child(1) &#123; white-space: nowrap; &#125; 参考链接Markdown 表格样式调整与自适应优化:http://moxfive.xyz/2016/03/04/markdown-table-style/]]></content>
+      <categories>
+        <category>sublime text 3</category>
+      </categories>
+      <tags>
+        <tag>sublime text 3</tag>
+        <tag>markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[测试文件]]></title>
+    <url>%2F2017%2F04%2F22%2F%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[我的人生]]></title>
+    <url>%2F2017%2F04%2F22%2F%E6%88%91%E7%9A%84%E4%BA%BA%E7%94%9F%2F</url>
+    <content type="text"><![CDATA[环境开始写作 测试阿萨德法师打发发生的非法]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[test]]></title>
+    <url>%2F2017%2F04%2F19%2Ftest%2F</url>
+    <content type="text"><![CDATA[&lt;% for (var link in site.data.menu) { %&gt; &lt;%= link %&gt; &lt;% } %&gt;]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2017%2F04%2F19%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[centos7中根据文件大小排序以及jenkins配置每周删除一次jobs日志信息]]></title>
+    <url>%2F2017%2F04%2F18%2Fcentos7%E4%B8%AD%E6%A0%B9%E6%8D%AE%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F%E6%8E%92%E5%BA%8F%E4%BB%A5%E5%8F%8Ajenkins%E9%85%8D%E7%BD%AE%E6%AF%8F%E5%91%A8%E5%88%A0%E9%99%A4%E4%B8%80%E6%AC%A1jobs%E6%97%A5%E5%BF%97%E4%BF%A1%E6%81%AF%2F</url>
+    <content type="text"><![CDATA[环境操作系统：win7虚拟机：centos7 效果按照文件大小降序1du * -sh | sort -hr #h 表示以人可读的形式显示出来 按创建时间排序1ls -alc # 按创建时间排序 查看文件大小1du -sh # 查看文件大小 根据文件的创建时间（修改时间）排序升序，取前100条，并且指定匹配名称为数字的，并删除1rm -rf `ls -lc | head -n 100 | grep -w &apos;[1-9]&apos;` 查询时间段为2016年3月01号到2017年4月8号内的名称为数字的目录1find . -type d -newermt &apos;01 Mar 2016&apos; ! -newermt &apos;08 Apr 2017&apos; -print | grep -w &apos;[1-9]*&apos; 显示文件时，包含年月日1ls -l --time-style=full –time-style参数： 12345full-iso 精确显示年月日时分秒纳秒及时区long-iso 显示年月日时分iso 默认就是iso，显示月日时分locale 按当前系统环境区域设置显示+Format 自定义格式显示 full-iso显示效果：12345678910ls -l --time-style=full-isodrwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:02:00.912981382 +0800 公共drwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:02:00.911981382 +0800 模板drwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:02:00.912981382 +0800 视频drwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:02:00.912981382 +0800 图片drwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:02:00.912981382 +0800 文档drwxr-xr-x. 2 yutao yutao 172 2017-04-05 18:51:58.592643038 +0800 下载drwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:02:00.912981382 +0800 音乐drwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:02:00.911981382 +0800 桌面 long-iso显示效果12345678910ls -l --time-style=long-isodrwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:02 公共drwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:02 模板drwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:02 视频drwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:02 图片drwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:02 文档drwxr-xr-x. 2 yutao yutao 172 2017-04-05 18:51 下载drwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:02 音乐drwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:02 桌面 自定义12345678910ls -l --time-style=&quot;+%Y-%m-%d %H:%l:%S&quot;drwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:11:00 公共drwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:11:00 模板drwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:11:00 视频drwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:11:00 图片drwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:11:00 文档drwxr-xr-x. 2 yutao yutao 172 2017-04-05 18: 6:58 下载drwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:11:00 音乐drwxr-xr-x. 2 yutao yutao 6 2017-03-21 11:11:00 桌面 查询7天前改动的文件夹，并列出详情、排序123456[root@master01 builds]# find . -mtime +7 -type d -ls|sort435016 4 drwxr-xr-x 2 jenkins jenkins 4096 Apr 10 16:42 ./456435045 4 drwxr-xr-x 2 jenkins jenkins 4096 Apr 11 12:00 ./457435051 4 drwxr-xr-x 2 jenkins jenkins 4096 Apr 11 13:56 ./458435062 4 drwxr-xr-x 2 jenkins jenkins 4096 Apr 11 16:11 ./459 列举上面那些是为了以下需求做铺垫。 需求最近jenkins出现没法构建的问题，点击立即构建没有反应。后来进入系统设置页面，看到提示，原来磁盘空间忙了。 1、首先我们需要知道构建的日志存在到哪里了？2、公司要求，保留一周的记录。 查找jenkins的日志存放位置由于当初我安装jenkins使用的是rpm进行安装。所以查看安装路径的方法： 1234567891011rpm -ql jenkins/etc/init.d/jenkins/etc/logrotate.d/jenkins/etc/sysconfig/jenkins/usr/lib/jenkins/usr/lib/jenkins/jenkins.war/usr/sbin/rcjenkins/var/cache/jenkins/var/lib/jenkins #存放的是构建时的日志/var/log/jenkins #jenkins 运行时是日志 所以，我们需要进入cd /var/lib/jenkins/jobs 这里面的每个文件夹就是我们配置的job构建后的日志存储的地方(里面的builds) 我们在jenkins中先新建一个job，专门用来执行删除日志的脚本。 job配置好了后，我们就需要写脚本啦！思路：①先获取改动时间在7天前的文件。②因为我们也需要知道，我们每次到底删除了哪些日志，所以我们还需要把删除的文件的时间显示到年月日。便于我们知道，删除的文件对不对。 查询改动时间为7天前的目录并列出详细信息时间精确到精确显示年月日时分秒纳秒及时区并写入到文件名为yutao中 以下命令执行的目录是：/var/lib/jenkins/jobs12345678# 因为我们要删除的是构建日志，所以需要查询每个`job`中`builds`路径中的日志find */builds/* -mtime +7 -type d| xargs ls -dl --full-time&gt;yutao#find */builds/* -mtime +7 -type d| xargs ls -dl --full-time|sortdrwxr-xr-x 2 jenkins jenkins 4096 2016-10-18 10:31:47.305175960 +0800 ggblog-test/builds/38drwxr-xr-x 2 jenkins jenkins 4096 2016-10-18 10:36:06.165175675 +0800 ggblog-test/builds/39drwxr-xr-x 2 jenkins jenkins 4096 2016-10-18 10:40:07.867175411 +0800 ggblog-test/builds/40drwxr-xr-x 2 jenkins jenkins 4096 2016-10-18 10:47:29.561174927 +0800 ggblog-test/builds/41 上面的方法有个问题： 1234find */builds/* -mtime +7 -type d| xargs ls -dl --full-time|sort#即使find命令什么都没有查到，由于命令ls -d是显示当前目录的属性，所以它会显示为：drwxr-xr-x 51 jenkins jenkins 4096 2017-04-20 14:13:46.495914200 +0800 . 也就是说即使什么都没有查到，依然会显示当前目录.，.表示的就是当前目录。 当然我们要进行删除操作，只需要这样写： 1rm -rf `find */builds/* -mtime +7 -type d` 但是，作为优秀的程序员，我们需要知道我们删除的文件详情。所以我们需要打印删除的文件详细。完整脚本：123456789101112131415#!/bin/bashcd /var/lib/jenkins/jobsecho 'delete log start'files=`find */builds/* -mtime +7 -type d`deletelog=`find */builds/* -mtime +7 -type d | xargs ls -dl --full-time|sort|xargs|sed "s/drwxr/\n\rdrwxr/g"`if [ ! "$files" = "" ]thenecho '即将删除的文件：'echo $&#123;deletelog&#125;rm -rf $&#123;files&#125;elseecho '没有文件要删除'fiecho 'delete log end' 效果： http://www.9usb.net/201005/linux-ls.htmlhttp://blog.csdn.net/u013008795/article/details/51135130http://man.linuxde.net/ls]]></content>
+  </entry>
+</search>

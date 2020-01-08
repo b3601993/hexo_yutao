@@ -1,0 +1,1005 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="环境操作系统：win7虚拟机：centos7 效果按照文件大小降序1du * -sh | sort -hr #h 表示以人可读的形式显示出来 按创建时间排序1ls -alc # 按创建时间排序 查看文件大小1du -sh # 查看文件大小 根据文件的创建时间（修改时间）排序升序，取前100条，并且指定匹配名称为数字的，并删除1rm -rf `ls -lc | head -n 100 | grep">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="centos7中根据文件大小排序以及jenkins配置每周删除一次jobs日志信息">
+<meta property="og:url" content="http://yoursite.com/2017/04/18/centos7中根据文件大小排序以及jenkins配置每周删除一次jobs日志信息/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="环境操作系统：win7虚拟机：centos7 效果按照文件大小降序1du * -sh | sort -hr #h 表示以人可读的形式显示出来 按创建时间排序1ls -alc # 按创建时间排序 查看文件大小1du -sh # 查看文件大小 根据文件的创建时间（修改时间）排序升序，取前100条，并且指定匹配名称为数字的，并删除1rm -rf `ls -lc | head -n 100 | grep">
+<meta property="og:image" content="http://img.blog.csdn.net/20170420193627039?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzA2NjI0NA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170420194419387?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzA2NjI0NA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170420194432425?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzA2NjI0NA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170420194456254?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzA2NjI0NA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170420194515004?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzA2NjI0NA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170420192039767?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzA2NjI0NA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170420192142516?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzA2NjI0NA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-04-22T14:01:43.394Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="centos7中根据文件大小排序以及jenkins配置每周删除一次jobs日志信息">
+<meta name="twitter:description" content="环境操作系统：win7虚拟机：centos7 效果按照文件大小降序1du * -sh | sort -hr #h 表示以人可读的形式显示出来 按创建时间排序1ls -alc # 按创建时间排序 查看文件大小1du -sh # 查看文件大小 根据文件的创建时间（修改时间）排序升序，取前100条，并且指定匹配名称为数字的，并删除1rm -rf `ls -lc | head -n 100 | grep">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170420193627039?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzA2NjI0NA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/18/centos7中根据文件大小排序以及jenkins配置每周删除一次jobs日志信息/"/>
+
+
+
+
+
+  <title> centos7中根据文件大小排序以及jenkins配置每周删除一次jobs日志信息 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?13edb36e6cfcdbf2b2c545e4e7a83328";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/18/centos7中根据文件大小排序以及jenkins配置每周删除一次jobs日志信息/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="山鬼谣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/yutao.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                centos7中根据文件大小排序以及jenkins配置每周删除一次jobs日志信息
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-18T20:25:00+08:00">
+                2017-04-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/04/18/centos7中根据文件大小排序以及jenkins配置每周删除一次jobs日志信息/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>操作系统：win7<br>虚拟机：centos7</p>
+<h1 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h1><h2 id="按照文件大小降序"><a href="#按照文件大小降序" class="headerlink" title="按照文件大小降序"></a>按照文件大小降序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">du * -sh | sort -hr #h 表示以人可读的形式显示出来</div></pre></td></tr></table></figure>
+<h2 id="按创建时间排序"><a href="#按创建时间排序" class="headerlink" title="按创建时间排序"></a>按创建时间排序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls -alc # 按创建时间排序</div></pre></td></tr></table></figure>
+<h2 id="查看文件大小"><a href="#查看文件大小" class="headerlink" title="查看文件大小"></a>查看文件大小</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">du -sh # 查看文件大小</div></pre></td></tr></table></figure>
+<p><strong>根据文件的创建时间（修改时间）排序升序，取前100条，并且指定匹配名称为数字的，并删除</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm -rf `ls -lc | head -n 100 | grep -w &apos;[1-9]&apos;`</div></pre></td></tr></table></figure></p>
+<h2 id="查询时间段为2016年3月01号到2017年4月8号内的名称为数字的目录"><a href="#查询时间段为2016年3月01号到2017年4月8号内的名称为数字的目录" class="headerlink" title="查询时间段为2016年3月01号到2017年4月8号内的名称为数字的目录"></a>查询时间段为2016年3月01号到2017年4月8号内的名称为数字的目录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -type d -newermt &apos;01 Mar 2016&apos; ! -newermt &apos;08 Apr 2017&apos; -print | grep -w &apos;[1-9]*&apos;</div></pre></td></tr></table></figure>
+<h2 id="显示文件时，包含年月日"><a href="#显示文件时，包含年月日" class="headerlink" title="显示文件时，包含年月日"></a>显示文件时，包含年月日</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls -l --time-style=full</div></pre></td></tr></table></figure>
+<p>–time-style参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">full-iso 精确显示年月日时分秒纳秒及时区</div><div class="line">long-iso 显示年月日时分</div><div class="line">iso 默认就是iso，显示月日时分</div><div class="line">locale 按当前系统环境区域设置显示</div><div class="line">+Format 自定义格式显示</div></pre></td></tr></table></figure>
+<h2 id="full-iso显示效果："><a href="#full-iso显示效果：" class="headerlink" title="full-iso显示效果："></a>full-iso显示效果：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">ls -l --time-style=full-iso</div><div class="line"></div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:02:00.912981382 +0800 公共</div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:02:00.911981382 +0800 模板</div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:02:00.912981382 +0800 视频</div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:02:00.912981382 +0800 图片</div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:02:00.912981382 +0800 文档</div><div class="line">drwxr-xr-x. 2 yutao yutao 172 2017-04-05 18:51:58.592643038 +0800 下载</div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:02:00.912981382 +0800 音乐</div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:02:00.911981382 +0800 桌面</div></pre></td></tr></table></figure>
+<h2 id="long-iso显示效果"><a href="#long-iso显示效果" class="headerlink" title="long-iso显示效果"></a>long-iso显示效果</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">ls -l --time-style=long-iso</div><div class="line"></div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:02 公共</div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:02 模板</div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:02 视频</div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:02 图片</div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:02 文档</div><div class="line">drwxr-xr-x. 2 yutao yutao 172 2017-04-05 18:51 下载</div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:02 音乐</div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:02 桌面</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="自定义"><a href="#自定义" class="headerlink" title="自定义"></a>自定义</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">ls -l --time-style=&quot;+%Y-%m-%d %H:%l:%S&quot;</div><div class="line"></div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:11:00 公共</div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:11:00 模板</div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:11:00 视频</div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:11:00 图片</div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:11:00 文档</div><div class="line">drwxr-xr-x. 2 yutao yutao 172 2017-04-05 18: 6:58 下载</div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:11:00 音乐</div><div class="line">drwxr-xr-x. 2 yutao yutao   6 2017-03-21 11:11:00 桌面</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="查询7天前改动的文件夹，并列出详情、排序"><a href="#查询7天前改动的文件夹，并列出详情、排序" class="headerlink" title="查询7天前改动的文件夹，并列出详情、排序"></a>查询7天前改动的文件夹，并列出详情、排序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@master01 builds]# find . -mtime +7 -type d -ls|sort</div><div class="line"></div><div class="line">435016    4 drwxr-xr-x   2 jenkins  jenkins      4096 Apr 10 16:42 ./456</div><div class="line">435045    4 drwxr-xr-x   2 jenkins  jenkins      4096 Apr 11 12:00 ./457</div><div class="line">435051    4 drwxr-xr-x   2 jenkins  jenkins      4096 Apr 11 13:56 ./458</div><div class="line">435062    4 drwxr-xr-x   2 jenkins  jenkins      4096 Apr 11 16:11 ./459</div></pre></td></tr></table></figure>
+<hr>
+<p>列举上面那些是为了以下需求做铺垫。</p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>最近<code>jenkins</code>出现没法构建的问题，点击<code>立即构建</code>没有反应。后来进入<code>系统设置</code>页面，看到提示，原来磁盘空间忙了。</p>
+<p>1、首先我们需要知道构建的日志存在到哪里了？<br>2、公司要求，保留一周的记录。</p>
+<h2 id="查找jenkins的日志存放位置"><a href="#查找jenkins的日志存放位置" class="headerlink" title="查找jenkins的日志存放位置"></a>查找jenkins的日志存放位置</h2><p>由于当初我安装<code>jenkins</code>使用的是<code>rpm</code>进行安装。<br>所以查看安装路径的方法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">rpm -ql jenkins</div><div class="line"></div><div class="line">/etc/init.d/jenkins</div><div class="line">/etc/logrotate.d/jenkins</div><div class="line">/etc/sysconfig/jenkins</div><div class="line">/usr/lib/jenkins</div><div class="line">/usr/lib/jenkins/jenkins.war</div><div class="line">/usr/sbin/rcjenkins</div><div class="line">/var/cache/jenkins</div><div class="line">/var/lib/jenkins <span class="comment">#存放的是构建时的日志</span></div><div class="line">/var/<span class="built_in">log</span>/jenkins <span class="comment">#jenkins 运行时是日志</span></div></pre></td></tr></table></figure>
+<p>所以，我们需要进入<code>cd /var/lib/jenkins/jobs</code></p>
+<p><img src="http://img.blog.csdn.net/20170420193627039?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzA2NjI0NA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>这里面的每个文件夹就是我们配置的job构建后的日志存储的地方(里面的<code>builds</code>)</p>
+<p>我们在<code>jenkins</code>中先新建一个job，专门用来执行删除日志的脚本。</p>
+<p><img src="http://img.blog.csdn.net/20170420194419387?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzA2NjI0NA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20170420194432425?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzA2NjI0NA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20170420194456254?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzA2NjI0NA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20170420194515004?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzA2NjI0NA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<hr>
+<p>job配置好了后，我们就需要写脚本啦！<br>思路：<br>①先获取改动时间在7天前的文件。<br>②因为我们也需要知道，我们每次到底删除了哪些日志，所以我们还需要把删除的文件的时间显示到年月日。便于我们知道，删除的文件对不对。</p>
+<p><strong>查询改动时间为7天前的目录并列出详细信息时间精确到精确显示年月日时分秒纳秒及时区并写入到文件名为yutao中</strong></p>
+<p>以下命令执行的目录是：<code>/var/lib/jenkins/jobs</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 因为我们要删除的是构建日志，所以需要查询每个`job`中`builds`路径中的日志</span></div><div class="line">find */builds/* -mtime +7 -type d| xargs ls -dl --full-time&gt;yutao</div><div class="line"><span class="comment">#find */builds/* -mtime +7 -type d| xargs ls -dl --full-time|sort</span></div><div class="line"></div><div class="line">drwxr-xr-x 2 jenkins jenkins 4096 2016-10-18 10:31:47.305175960 +0800 ggblog-test/builds/38</div><div class="line">drwxr-xr-x 2 jenkins jenkins 4096 2016-10-18 10:36:06.165175675 +0800 ggblog-test/builds/39</div><div class="line">drwxr-xr-x 2 jenkins jenkins 4096 2016-10-18 10:40:07.867175411 +0800 ggblog-test/builds/40</div><div class="line">drwxr-xr-x 2 jenkins jenkins 4096 2016-10-18 10:47:29.561174927 +0800 ggblog-test/builds/41</div></pre></td></tr></table></figure></p>
+<p>上面的方法有个问题：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">find */builds/* -mtime +7 -type d| xargs ls -dl --full-time|sort</div><div class="line"><span class="comment">#即使find命令什么都没有查到，由于命令ls -d是显示当前目录的属性，所以它会显示为：</span></div><div class="line"></div><div class="line">drwxr-xr-x 51 jenkins jenkins 4096 2017-04-20 14:13:46.495914200 +0800 .</div></pre></td></tr></table></figure>
+<p>也就是说即使什么都没有查到，依然会显示当前目录<code>.</code>，<code>.</code>表示的就是当前目录。</p>
+<p>当然我们要进行删除操作，只需要这样写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm -rf `find */builds/* -mtime +7 -type d`</div></pre></td></tr></table></figure>
+<p>但是，作为优秀的程序员，我们需要知道我们删除的文件详情。所以我们需要打印删除的文件详细。<br>完整脚本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="built_in">cd</span> /var/lib/jenkins/<span class="built_in">jobs</span></div><div class="line"><span class="built_in">echo</span> <span class="string">'delete log start'</span></div><div class="line">files=`find */builds/* -mtime +7 -type d`</div><div class="line">deletelog=`find */builds/* -mtime +7 -type d | xargs ls -dl --full-time|sort|xargs|sed <span class="string">"s/drwxr/\n\rdrwxr/g"</span></div><div class="line">`</div><div class="line"><span class="keyword">if</span> [ ! <span class="string">"<span class="variable">$files</span>"</span> = <span class="string">""</span> ]</div><div class="line"><span class="keyword">then</span></div><div class="line"><span class="built_in">echo</span> <span class="string">'即将删除的文件：'</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$&#123;deletelog&#125;</span></div><div class="line">rm -rf <span class="variable">$&#123;files&#125;</span></div><div class="line"><span class="keyword">else</span></div><div class="line"><span class="built_in">echo</span> <span class="string">'没有文件要删除'</span></div><div class="line"><span class="keyword">fi</span></div><div class="line"><span class="built_in">echo</span> <span class="string">'delete log end'</span></div></pre></td></tr></table></figure></p>
+<p>效果：<br><img src="http://img.blog.csdn.net/20170420192039767?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzA2NjI0NA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20170420192142516?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzA2NjI0NA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><a href="http://www.9usb.net/201005/linux-ls.html" target="_blank" rel="external">http://www.9usb.net/201005/linux-ls.html</a><br><a href="http://blog.csdn.net/u013008795/article/details/51135130" target="_blank" rel="external">http://blog.csdn.net/u013008795/article/details/51135130</a><br><a href="http://man.linuxde.net/ls" target="_blank" rel="external">http://man.linuxde.net/ls</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/19/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/yutao.jpg"
+               alt="山鬼谣" />
+          <p class="site-author-name" itemprop="name">山鬼谣</p>
+           
+              <p class="site-description motion-element" itemprop="description">人各有命，上天注定，有人天生为王，有人落草为寇，脚下的路，如果不是你自己的选择，那旅途的终点在哪儿也没人知道</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#环境"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#效果"><span class="nav-number">2.</span> <span class="nav-text">效果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#按照文件大小降序"><span class="nav-number">2.1.</span> <span class="nav-text">按照文件大小降序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按创建时间排序"><span class="nav-number">2.2.</span> <span class="nav-text">按创建时间排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件大小"><span class="nav-number">2.3.</span> <span class="nav-text">查看文件大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询时间段为2016年3月01号到2017年4月8号内的名称为数字的目录"><span class="nav-number">2.4.</span> <span class="nav-text">查询时间段为2016年3月01号到2017年4月8号内的名称为数字的目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示文件时，包含年月日"><span class="nav-number">2.5.</span> <span class="nav-text">显示文件时，包含年月日</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#full-iso显示效果："><span class="nav-number">2.6.</span> <span class="nav-text">full-iso显示效果：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#long-iso显示效果"><span class="nav-number">2.7.</span> <span class="nav-text">long-iso显示效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义"><span class="nav-number">2.8.</span> <span class="nav-text">自定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询7天前改动的文件夹，并列出详情、排序"><span class="nav-number">2.9.</span> <span class="nav-text">查询7天前改动的文件夹，并列出详情、排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#需求"><span class="nav-number">2.10.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找jenkins的日志存放位置"><span class="nav-number">2.11.</span> <span class="nav-text">查找jenkins的日志存放位置</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">山鬼谣</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "ff753aa1d7dd4948bd2829975f451517",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
